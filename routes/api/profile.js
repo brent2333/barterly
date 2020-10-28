@@ -58,8 +58,8 @@ router.post('/', [auth, [
         serviceArea
       };
 
-    profileFields.haves = Array.isArray(haves) ? profileFields.haves : [];
-    profileFields.wants = Array.isArray(wants) ? profileFields.wants : [];
+    profileFields.haves = Array.isArray(haves) ? haves : [];
+    profileFields.wants = Array.isArray(wants) ? wants : [];
 
     try {
         let profile = await Profile.findOne({ user: req.user.id });

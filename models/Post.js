@@ -9,14 +9,21 @@ const PostSchema = new Schema({
     kind:{
         type: String,
         required: true,
+    },
+    goodsServices:{
+        type: String,
+        required: true,
     }, 
+    category: {
+        type: String,
+        required: true,
+    },
     text: {
         type: String,
         required: true,
     },
     image: {
         type: String,
-        required: true,
     },
     name: {
         type: String,
