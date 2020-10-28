@@ -209,5 +209,61 @@ router.delete('/comment/:id/:comment_id', auth, async (req,res) => {
     }
 });
 
+// @route   PUT api/post/servicearea
+// @desc    Add profile service area
+// @access  Private
+// regional, worldwide, local
+
+router.put('/servicearea/:id', [auth, [
+    check('kind', 'Kind is required').not().isEmpty(),
+]], async (req, res) => {
+    console.log('!!!!USER', req.user);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json( {errors: errors.array() } );
+    }
+
+    const {
+        kind,
+        location,
+        proximity,
+    } = req.body;
+
+    const newSvcArea = {
+        kind,
+        location,
+        proximity
+    }
+
+    try {
+        const post = await Post.findById(req.params.id);
+        const profile = await Profile.findOne({ user: req.user.id });
+        console.log('!!!!profile', profile);
+
+        if (kind === 'Regional') {
+            if (!location) {
+                return res.status(400).json({ msg: 'Regional types must have location information'} );
+            } else {
+                newSvcArea.location = location;
+            }
+        } else if (kind === 'Local') {
+            newSvcArea.location = profile.location;
+        } else if (kind === 'Worldwide') {
+            newSvcArea.location = null;
+        }
+
+        post.serviceArea = newSvcArea;
+
+        await post.save();
+
+        res.json(post);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).end('Server Error');
+    }
+}
+);
+
 
 module.exports = router;

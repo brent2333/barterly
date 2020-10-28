@@ -61,6 +61,28 @@ const PostSchema = new Schema({
             }
         }
     ],
+    serviceArea: {
+        kind: {
+          type: String
+        },
+        location: {
+          country:  {
+            type: String
+          },
+          zip: {
+            type: String
+          },
+          city: {
+            type: String
+          }, 
+          state:  {
+            type: String
+          }
+        },
+        proximity:  {
+          type: String
+        }
+      },
     date: {
         type: Date,
         default: Date.now

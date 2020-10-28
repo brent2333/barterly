@@ -45,28 +45,6 @@ const ProfileSchema = new mongoose.Schema({
     bio: {
       type: String
     },
-    serviceArea: {
-      kind: {
-        type: String
-      },
-      location: {
-        country:  {
-          type: String
-        },
-        zip: {
-          type: String
-        },
-        city: {
-          type: String
-        }, 
-        state:  {
-          type: String
-        }
-      },
-      proximity:  {
-        type: String
-      }
-    },
     date: {
     type: Date,
     default: Date.now
