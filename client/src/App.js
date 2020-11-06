@@ -12,8 +12,8 @@ import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
-import AddHavesWants from './components/profile-forms/AddHavesWants';
-import AddLocation from './components/profile-forms/AddLocation';
+import AddHaves from './components/profile-forms/AddHaves';
+import AddWants from './components/profile-forms/AddWants';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Login from './components/auth/Login';
 // Redux
@@ -46,8 +46,8 @@ const App = () => {
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/create-profile" component={CreateProfile} />
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-          <PrivateRoute exact path="/add-haveswants" component={AddHavesWants} />
-          <PrivateRoute exact path="/add-location" component={AddLocation} />
+          <PrivateRoute exact path="/add-haves" component={AddHaves} />
+          <PrivateRoute exact path="/add-wants" component={AddWants} />
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/posts/:id" component={Post} />
         </Switch>

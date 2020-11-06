@@ -22,26 +22,22 @@ const ProfileSchema = new mongoose.Schema({
         type: String
       }
     },
-    haves: [
-      {
-        skills: {
-          type: [String]    
-        },
-        products: {
-          type: [String]
-        },
-      }
-    ],
-    wants: [
-      {
-        skills: {
-          type: [String]    
-        },
-        products: {
-          type: [String]
-        },
-      }
-    ],
+    haves: [{
+      description: {
+        type: String
+      },
+      title: {
+        type: String
+      },  
+    }],
+    wants: [{
+      description: {
+        type: String
+      },
+      title: {
+        type: String
+      },  
+    }],
     bio: {
       type: String
     },

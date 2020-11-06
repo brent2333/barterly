@@ -89,7 +89,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     }
 }
 
-export const addHavesWants = (formData, history) => async dispatch => {
+export const addHaves = (formData, history) => async dispatch => {
     try {
         const config = {
             headers: {
@@ -97,18 +97,79 @@ export const addHavesWants = (formData, history) => async dispatch => {
             }
         }
 
-        const res = await axios.put('/api/profile/haveswants', formData, config);
+        const res = await axios.put('/api/profile/haves', formData, config);
         dispatch({
             type: UPDATE_PROFILE,
             payload: res.data
         });
-        dispatch(setAlert('Haves/Wants Added', 'success'));
+        dispatch(setAlert('Haves Added', 'success'));
         history.push('/dashboard');
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
         }
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
+export const deleteHaves = id => async dispatch => {
+    try {
+        const res = await axios.delete(`api/profile/haves/${id}`);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+        dispatch(setAlert('Have Removed', 'success'));
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
+export const addWants = (formData, history) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put('/api/profile/wants', formData, config);
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+        dispatch(setAlert('Wants Added', 'success'));
+        history.push('/dashboard');
+    } catch (err) {
+        const errors = err.response.data.errors;
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
+export const deleteWants = id => async dispatch => {
+    try {
+        const res = await axios.delete(`api/profile/wants/${id}`);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+        dispatch(setAlert('Want Removed', 'success'));
+    } catch (err) {
         dispatch({
             type: PROFILE_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }
@@ -203,23 +264,6 @@ export const addLocation = (formData, history) => async dispatch => {
 //         });
 //     }
 // }
-
-export const deleteHaves = id => async dispatch => {
-    try {
-        const res = await axios.delete(`api/profile/haves/${id}`);
-
-        dispatch({
-            type: UPDATE_PROFILE,
-            payload: res.data
-        });
-        dispatch(setAlert('Have Removed', 'success'));
-    } catch (err) {
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: { msg: err.response.statusText, status: err.response.status }
-        });
-    }
-}
 
 export const deleteAccount = () => async dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone')) {
