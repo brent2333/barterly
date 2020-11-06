@@ -60,10 +60,11 @@ export const getProfileById = userId => async dispatch => {
 }
 
 export const createProfile = (formData, history, edit = false) => async dispatch => {
+    console.log('createProfile', formData);
     try {
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'multipart/form-data'
             }
         }
 
@@ -202,6 +203,23 @@ export const addLocation = (formData, history) => async dispatch => {
 //         });
 //     }
 // }
+
+export const deleteHaves = id => async dispatch => {
+    try {
+        const res = await axios.delete(`api/profile/haves/${id}`);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+        dispatch(setAlert('Have Removed', 'success'));
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
 
 export const deleteAccount = () => async dispatch => {
     if (window.confirm('Are you sure? This can NOT be undone')) {

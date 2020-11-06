@@ -4,10 +4,13 @@ const request = require('request');
 const { check, validationResult } = require('express-validator');
 const normalize = require('normalize-url');
 const config = require('config');
+const multer = require('multer');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const Post = require('../../models/Post');
+const File = require('../../models/File');
+
 const auth = require('../../middleware/auth');
 
 // @route   GET api/profile/me
@@ -30,10 +33,45 @@ router.get('/me', auth, async (req, res) => {
 // @route   POST api/profile/
 // @desc    Create or Update user profile
 // @access  Private
-router.post('/', [auth, [
-    check('bio', 'Bio is required').not().isEmpty()
+const upload = multer({
+    storage: multer.diskStorage({
+      destination(req, file, cb) {
+        cb(null, './files');
+      },
+      filename(req, file, cb) {
+        cb(null, `${new Date().getTime()}_${file.originalname}`);
+      }
+    }),
+    limits: {
+      fileSize: 1000000 // max file size 1MB = 1000000 bytes
+    },
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(jpeg|jpg|png|pdf|doc|docx|xlsx|xls)$/)) {
+        return cb(
+          new Error(
+            'only upload files with jpg, jpeg, png, pdf, doc, docx, xslx, xls format.'
+          )
+        );
+      }
+      cb(undefined, true); // continue with upload
+    }
+  });
 
-]], async (req, res) => {
+router.post('/', [upload.single('file'), auth], async (req, res) => {
+    // try {
+    //     const { path, mimetype } = req.file;
+    //     const file = new File({
+    //       title,
+    //       description,
+    //       file_path: path,
+    //       file_mimetype: mimetype
+    //     });
+    //     await file.save();
+    //     res.send('file uploaded successfully.');
+    //   } catch (error) {
+    //     res.status(400).send('Error while uploading file. Try again later.');
+    //   }
+
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array()});
@@ -44,7 +82,8 @@ router.post('/', [auth, [
         location,
         haves,
         wants,
-        serviceArea
+        serviceArea,
+        file
     } = req.body;
     // build profile object
     const profileFields = {
@@ -52,13 +91,20 @@ router.post('/', [auth, [
         website: website && website !== '' ? normalize(website, { forceHttps: true }) : '',
         bio,
         location,
-        serviceArea
+        serviceArea,
+        file
       };
 
     profileFields.haves = Array.isArray(haves) ? haves : [];
     profileFields.wants = Array.isArray(wants) ? wants : [];
 
     try {
+        const { path, mimetype } = req.file;
+        const file = new File({
+          file_path: path,
+          file_mimetype: mimetype
+        });
+        await file.save();
         let profile = await Profile.findOne({ user: req.user.id });
         if (profile) {
             //update

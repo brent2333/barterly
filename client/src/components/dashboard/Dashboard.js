@@ -38,7 +38,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
                 Create Profile
             </Link>
             </Fragment>
-            }
+        }
     </Fragment>;
 }
 
@@ -49,9 +49,9 @@ Dashboard.propTypes = {
     deleteAccount: PropTypes.func.isRequired,
 }
 
-const mapStateTpProps = state => ({
+const mapStateToProps = state => ({
     auth: state.auth,
     profile: state.profile
 })
 
-export default connect(mapStateTpProps, { getCurrentProfile, deleteAccount })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);

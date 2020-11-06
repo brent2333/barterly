@@ -50,7 +50,6 @@ const App = () => {
           <PrivateRoute exact path="/add-location" component={AddLocation} />
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/posts/:id" component={Post} />
-
         </Switch>
       </section>
     </Fragment>
