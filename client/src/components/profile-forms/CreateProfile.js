@@ -2,7 +2,6 @@ import React, { useState, Fragment, useRef } from 'react'
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { createProfile } from '../../actions/profile';
 
@@ -10,6 +9,7 @@ const CreateProfile = ({ createProfile, history }) => {
     const [formData, setFormData] = useState({
         website: '',
         bio: '',
+        file: {}
     });
     const {
         website,
@@ -18,7 +18,6 @@ const CreateProfile = ({ createProfile, history }) => {
     // file upload
     const [file, setFile] = useState(null); // state for storing actual image
     const [previewSrc, setPreviewSrc] = useState(''); // state for storing previewImage
-    const [errorMsg, setErrorMsg] = useState('');
     const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
     const dropRef = useRef(); // React ref for managing the hover state of droppable area
     const onDrop = (files) => {
@@ -44,7 +43,6 @@ const CreateProfile = ({ createProfile, history }) => {
     const onChange = e => 
     setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = e => {
-        console.log('!!ONSUBMIT');
         e.preventDefault();
         const formData = new FormData();
 
@@ -52,7 +50,10 @@ const CreateProfile = ({ createProfile, history }) => {
             console.log("WE HAVE A FILE");
             formData.append('file', file);
         }
+
         formData.append('bio', bio);
+        formData.append('website', website);
+
         createProfile(formData, history);
     }
     return (

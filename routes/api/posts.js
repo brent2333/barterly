@@ -25,7 +25,6 @@ router.post('/', [auth, [
             goodsServices: req.body.goodsServices,
             category: req.body.category,
             name: user.name,
-            avatar: user.avatar,
             user: req.user.id
         });
 
@@ -162,7 +161,6 @@ router.post('/comment/:id', [auth, [
         const newComment = {
             text: req.body.text,
             name: user.name,
-            avatar: user.avatar,
             user: req.user.id
         };
 

@@ -10,14 +10,14 @@ const PostItem = ({
   addLike,
   removeLike,
   deletePost,
-  post: { _id, text, name, avatar, user, likes, comments, date },
+  post: { _id, text, name, user, likes, comments, date },
   showActions
 }) => {
   return (
     <div className="post bg-light p-1 my-1">
       <div>
         <Link to={`/profile/${user}`}>
-          <img className="round-img" src={avatar} alt="" />
+          <img className="round-img" alt="" />
           <h4>{name}</h4>
         </Link>
       </div>

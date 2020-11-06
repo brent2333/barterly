@@ -49,13 +49,8 @@ const ProfileSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
     },
-    file: {
-      file_path: {
-        type: String,
-      },
-      file_mimetype: {
-        type: String,
-      }
+    profileImage: {
+      type: String
     },
     following: [
       {

@@ -18,7 +18,7 @@ const auth = require('../../middleware/auth');
 // @access  Private
 router.get('/me', auth, async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name']);
         if(!profile) {
             return res.status(400).json({ msg: 'There is no profile for this user'})
         }
@@ -36,7 +36,7 @@ router.get('/me', auth, async (req, res) => {
 const upload = multer({
     storage: multer.diskStorage({
       destination(req, file, cb) {
-        cb(null, './files');
+        cb(null, './client/public/files');
       },
       filename(req, file, cb) {
         cb(null, `${new Date().getTime()}_${file.originalname}`);
@@ -46,10 +46,10 @@ const upload = multer({
       fileSize: 1000000 // max file size 1MB = 1000000 bytes
     },
     fileFilter(req, file, cb) {
-      if (!file.originalname.match(/\.(jpeg|jpg|png|pdf|doc|docx|xlsx|xls)$/)) {
+      if (!file.originalname.match(/\.(jpeg|jpg|png)$/)) {
         return cb(
           new Error(
-            'only upload files with jpg, jpeg, png, pdf, doc, docx, xslx, xls format.'
+            'only upload files with jpg, jpeg and png format.'
           )
         );
       }
@@ -92,7 +92,6 @@ router.post('/', [upload.single('file'), auth], async (req, res) => {
         bio,
         location,
         serviceArea,
-        file
       };
 
     profileFields.haves = Array.isArray(haves) ? haves : [];
@@ -105,6 +104,8 @@ router.post('/', [upload.single('file'), auth], async (req, res) => {
           file_mimetype: mimetype
         });
         await file.save();
+        const profileImage = req.file.filename;
+        profileFields.profileImage = profileImage;
         let profile = await Profile.findOne({ user: req.user.id });
         if (profile) {
             //update
@@ -131,7 +132,7 @@ router.post('/', [upload.single('file'), auth], async (req, res) => {
 // @access  Public
 router.get('/', async (req,res) => {
     try {
-        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+        const profiles = await Profile.find().populate('user', ['name']);
         res.json(profiles);
     } catch (err) {
         console.error(err.message);
@@ -144,7 +145,7 @@ router.get('/', async (req,res) => {
 // @access  Public
 router.get('/user/:user_id', async (req,res) => {
     try {
-        const profile = await Profile.findOne({ user: req.params.user_id}).populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.params.user_id}).populate('user', ['name']);
         if (!profile) return res.status(400).json({ msg: "Profile not found"});
         res.json(profile);
     } catch (err) {
