@@ -3,20 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import ProfileItem from './ProfileItem';
-import { getProfiles } from '../../actions/profile';
-const Profiles = ({ getProfiles, auth: { user }, profile: {profiles, loading} }) => {
+import { getFollowing } from '../../actions/profile';
+const Following = ({ getProfiles, auth: { user }, profile: {profiles, loading} }) => {
     useEffect(() =>{
-        getProfiles();
-    }, [getProfiles]);
+        getFollowing();
+    }, []);
 
     return (
         <Fragment>
             { loading ? <Spinner /> : <Fragment>
-                <h1 className="large text-primary">Members</h1>
-                <p className="lead">
-                    <i className="fab fa-connectdevelop"/>
-                    {' '}Browse and connect with members
-                </p>
+                <h1 className="large text-primary">Following</h1>
                 <div className="profiles">
                     {profiles.length > 0 ? (
                         profiles.map(profile => (
@@ -29,8 +25,8 @@ const Profiles = ({ getProfiles, auth: { user }, profile: {profiles, loading} })
     )
 }
 
-Profiles.propTypes = {
-    getProfiles: PropTypes.func.isRequired,
+Following.propTypes = {
+    getFollowing: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
 }
 
@@ -39,4 +35,4 @@ const mapStateToProps = state => ({
     profile: state.profile
 })
 
-export default connect(mapStateToProps, { getProfiles })(Profiles);
+export default connect(mapStateToProps, { getFollowing })(Following);

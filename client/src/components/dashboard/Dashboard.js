@@ -14,7 +14,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
         getCurrentProfile();
     }, [getCurrentProfile]);
     return loading && profile === null ? <Spinner /> :
-    <Fragment>
+    <div className="dashwrap">
         <h1 className="large text-primary">
             Dashboard
         </h1>
@@ -23,7 +23,13 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
         </p>
         {profile !== null ? 
         <Fragment>
+        <div>
+            <Link to={`/profile/${profile._id}`} className="btn btn-primary">
+                View Profile
+            </Link>
+        </div>
             <DashboardActions/>
+            <div>Following <Link to="/following" >{profile.following.length}</Link></div>
             {/* <Experience experience={profile.experience} />
             <Education education={profile.education} /> */}
             <div className="ny-2">
@@ -39,7 +45,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
             </Link>
             </Fragment>
         }
-    </Fragment>;
+    </div>;
 }
 
 Dashboard.propTypes = {

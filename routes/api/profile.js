@@ -58,19 +58,6 @@ const upload = multer({
   });
 
 router.post('/', [upload.single('file'), auth], async (req, res) => {
-    // try {
-    //     const { path, mimetype } = req.file;
-    //     const file = new File({
-    //       title,
-    //       description,
-    //       file_path: path,
-    //       file_mimetype: mimetype
-    //     });
-    //     await file.save();
-    //     res.send('file uploaded successfully.');
-    //   } catch (error) {
-    //     res.status(400).send('Error while uploading file. Try again later.');
-    //   }
 
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
@@ -143,9 +130,9 @@ router.get('/', async (req,res) => {
 // @route   GET api/profile/user/:user_id
 // @desc    Get profile by user ID
 // @access  Public
-router.get('/user/:user_id', async (req,res) => {
+router.get('/user/:id', async (req,res) => {
     try {
-        const profile = await Profile.findOne({ user: req.params.user_id}).populate('user', ['name']);
+        const profile = await Profile.findOne({ _id: req.params.id}).populate('user', ['name']);
         if (!profile) return res.status(400).json({ msg: "Profile not found"});
         res.json(profile);
     } catch (err) {
@@ -324,9 +311,56 @@ router.put('/wants', [auth, [
 }
 );
 
+// @route   PUT api/profile/follow
+// @desc    Add profile follows
+// @access  Private
+router.put('/follow', auth, async (req, res) => {
+
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        const {
+            userProfileId
+        } = req.body;
+    
+        const newFollow = {
+            userProfileId: userProfileId
+        }
+
+        profile.following.unshift(newFollow);
+
+        await profile.save();
+
+        res.json(profile);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).end('Server Error');
+    }
+}
+);
+
+// @route   GET api/profile/follows
+// @desc    Get the profiles a user is following
+// @access  Private
+router.get('/follows', auth, async (req,res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+        const profileArray = [];
+        profile.following.map(p => {
+            profileArray.push(p.userProfileId);
+        });
+        const follows = await Profile.find({_id: {$in: profileArray }});
+        res.json(follows);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).end('Server Error');
+    }
+});
+
 // @route   DELETE api/profile/wants/:id
 // @desc    Delete a have
-// @access  Private 5f8dea1c3602612b8422f2b5
+// @access  Private
 router.delete('/wants/:id', auth, async (req,res) => {
     try {
         const profile = await Profile.findOne({ user: req.user.id });

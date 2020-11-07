@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addFollow } from '../../actions/profile'; 
 
-const ProfileItem = ({ profile: {
-    user: { _id, name },
+const ProfileItem = ({ addFollow, profile: {
+    user,
+    _id,
     website,
     bio,
     profileImage
@@ -15,11 +18,13 @@ const ProfileItem = ({ profile: {
             }
             
             <div>
-                <h2>{name}</h2>
+                <h2>{user.name}</h2>
                 <p>{bio}</p>
-                <p>{website}</p>
+                {
+                    website ? (<p><a href={website} target="_blank" rel="noreferrer">Website</a></p>) : ''
+                }
                 {/* <p className="my-1">{location && <span>{location}</span>}</p> */}
-                <Link to={`/profile/${_id}`} className="btn btn-primary">
+                <Link to={`/profile/${user._id}`} className="btn btn-primary">
                     View Profile
                 </Link>
             </div>
@@ -30,12 +35,19 @@ const ProfileItem = ({ profile: {
                     </li>
                 ))} */}
             </ul>
+            <button 
+                className="btn btn-primary"
+                onClick={(e) => addFollow(_id)}
+                >
+                <i className="fas fa-user-plus"></i> Follow
+            </button>
         </div>
     )
 }
 
 ProfileItem.propTypes = {
     profile: PropTypes.object.isRequired,
+    addFollow: PropTypes.func.isRequired,
 }
 
-export default ProfileItem
+export default connect(null, {addFollow})(ProfileItem);
