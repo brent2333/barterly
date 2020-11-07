@@ -255,9 +255,42 @@ export const addFollow = (id) => async dispatch => {
     }
 }
 
+export const deleteFollow = id => async dispatch => {
+    try {
+        const res = await axios.delete(`api/profile/following/${id}`);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+        dispatch(setAlert('Follow Removed', 'success'));
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
 export const getFollowing = () => async dispatch => {
     try {
         const res = await axios.get('/api/profile/follows');
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        });
+
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
+export const getFollowers = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/profile/followers');
         dispatch({
             type: GET_PROFILES,
             payload: res.data

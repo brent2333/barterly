@@ -548,6 +548,10 @@ blockquote {
     display: none;
   }
 
+  blockquote {
+    width: 95%;
+}
+
   /* Profiles Page */
   .profile {
     position: relative;

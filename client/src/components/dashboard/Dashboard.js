@@ -30,6 +30,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
         </div>
             <DashboardActions/>
             <div>Following <Link to="/following" >{profile.following.length}</Link></div>
+            <div>Followers <Link to="/followers" >{profile.followers.length}</Link></div>
             {/* <Experience experience={profile.experience} />
             <Education education={profile.education} /> */}
             <div className="ny-2">

@@ -318,6 +318,17 @@ router.put('/follow', auth, async (req, res) => {
 
     try {
         const profile = await Profile.findOne({ user: req.user.id });
+        const followee = await Profile.findOne({ _id: req.body.userProfileId });
+
+        const newFollower = {
+            userProfileId: String(profile._id)
+        }
+
+        followee.followers.unshift(newFollower);
+        console.log('PROFILE', profile);
+        console.log('NEW FOLLOWER',newFollower);
+        console.log('FOLLOWEE', followee);
+        console.log('followee.followers',followee.followers);
 
         const {
             userProfileId
@@ -330,6 +341,7 @@ router.put('/follow', auth, async (req, res) => {
         profile.following.unshift(newFollow);
 
         await profile.save();
+        await followee.save();
 
         res.json(profile);
 
@@ -350,8 +362,48 @@ router.get('/follows', auth, async (req,res) => {
         profile.following.map(p => {
             profileArray.push(p.userProfileId);
         });
+        console.log('^^^^^^^^^',profile, profileArray);
         const follows = await Profile.find({_id: {$in: profileArray }});
         res.json(follows);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).end('Server Error');
+    }
+});
+
+// @route   GET api/profile/followers
+// @desc    Get the profiles a user is following
+// @access  Private
+router.get('/followers', auth, async (req,res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+        const profileArray = [];
+        profile.followers.map(p => {
+            profileArray.push(p.userProfileId);
+        });
+        const followers = await Profile.find({_id: {$in: profileArray }});
+        res.json(followers);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).end('Server Error');
+    }
+});
+
+// @route   DELETE api/profile/following/:id
+// @desc    Delete a follow
+// @access  Private
+router.delete('/following/:id', auth, async (req,res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        // get remove index
+        const removeIndex = profile.following.map(item => item.id).indexOf(req.params.id);
+        profile.following.splice(removeIndex, 1);
+        
+        await profile.save();
+
+        res.json(profile);
+
     } catch (err) {
         console.error(err.message);
         res.status(500).end('Server Error');

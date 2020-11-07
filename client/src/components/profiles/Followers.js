@@ -2,21 +2,21 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import FollowProfiles from './FollowProfiles';
-import { getFollowing } from '../../actions/profile';
-const Following = ({ getFollowing, auth: { user }, profile: {profiles, loading} }) => {
+import ProfileItem from './ProfileItem';
+import { getFollowers } from '../../actions/profile';
+const Followers = ({ getFollowers, auth: { user }, profile: {profiles, loading} }) => {
     useEffect(() =>{
-        getFollowing();
-    }, [getFollowing]);
-    console.log('$$$$$$', profiles.length);
+        getFollowers();
+    }, [getFollowers]);
+
     return (
         <Fragment>
             { loading ? <Spinner /> : <Fragment>
-                <h1 className="large text-primary">Following</h1>
+                <h1 className="large text-primary">Followers</h1>
                 <div className="profiles">
                     {profiles.length > 0 ? (
                         profiles.map(profile => (
-                            <FollowProfiles key={profile._id} profile={profile}/>
+                            <ProfileItem key={profile._id} profile={profile}/>
                         ))
                     ) : <h4>No profiles found...</h4>}
                 </div>
@@ -25,8 +25,8 @@ const Following = ({ getFollowing, auth: { user }, profile: {profiles, loading} 
     )
 }
 
-Following.propTypes = {
-    getFollowing: PropTypes.func.isRequired,
+Followers.propTypes = {
+    getFollowers: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
 }
 
@@ -35,4 +35,4 @@ const mapStateToProps = state => ({
     profile: state.profile
 })
 
-export default connect(mapStateToProps, { getFollowing })(Following);
+export default connect(mapStateToProps, { getFollowers })(Followers);
