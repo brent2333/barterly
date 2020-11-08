@@ -24,7 +24,7 @@ const ProfileItem = ({ addFollow, profile: {
                     website ? (<p><a href={website} target="_blank" rel="noreferrer">Website</a></p>) : ''
                 }
                 {/* <p className="my-1">{location && <span>{location}</span>}</p> */}
-                <Link to={`/profile/${user._id}`} className="btn btn-primary">
+                <Link to={`/profile/${_id}`} className="btn btn-primary">
                     View Profile
                 </Link>
             </div>

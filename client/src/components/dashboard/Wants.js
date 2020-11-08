@@ -2,10 +2,10 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 // import Moment from 'react-moment';
-import { deleteHaves } from '../../actions/profile';
+import { deleteWants } from '../../actions/profile';
 
-const Haves = ({ haves, deleteHaves }) => {
-    const have = haves.map(
+const Wants = ({ wants, deleteWants }) => {
+    const want = wants.map(
         hw => (
             <tr key={hw._id}>
                 <td>{hw.title}</td>
@@ -13,7 +13,7 @@ const Haves = ({ haves, deleteHaves }) => {
                 <td>
                     <button
                     className="btn btn-danger"
-                    onClick={() => deleteHaves(hw._id)}>Delete</button>
+                    onClick={() => deleteWants(hw._id)}>Delete</button>
                 </td>
             </tr>
 
@@ -21,7 +21,7 @@ const Haves = ({ haves, deleteHaves }) => {
     )
     return (
         <Fragment>
-            <h2 className="my-2">My Haves</h2>
+            <h2 className="my-2">My Wants</h2>
             <table className="table">
                 <thead>
                     <tr>
@@ -31,16 +31,16 @@ const Haves = ({ haves, deleteHaves }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {have}
+                    {want}
                 </tbody>
             </table>
         </Fragment>
     )
 }
 
-Haves.propTypes = {
+Wants.propTypes = {
     have: PropTypes.array.isRequired,
-    deleteHaves: PropTypes.func.isRequired,
+    deleteWants: PropTypes.func.isRequired,
 }
 
-export default connect(null, { deleteHaves })(Haves);
+export default connect(null, { deleteWants })(Wants);

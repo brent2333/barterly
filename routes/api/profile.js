@@ -362,7 +362,6 @@ router.get('/follows', auth, async (req,res) => {
         profile.following.map(p => {
             profileArray.push(p.userProfileId);
         });
-        console.log('^^^^^^^^^',profile, profileArray);
         const follows = await Profile.find({_id: {$in: profileArray }});
         res.json(follows);
     } catch (err) {
