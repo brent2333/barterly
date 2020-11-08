@@ -540,6 +540,13 @@ blockquote {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 900px) {
+  /* tables */
+  .table th, .table td {
+    padding: 0.5%;
+  }
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
@@ -562,6 +569,7 @@ blockquote {
   .lead {
     font-size: 1rem;
   }
+
 
   /* Navbar */
   .navbar {

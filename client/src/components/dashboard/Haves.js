@@ -39,7 +39,7 @@ const Haves = ({ haves, deleteHaves }) => {
 }
 
 Haves.propTypes = {
-    have: PropTypes.array.isRequired,
+    have: PropTypes.array,
     deleteHaves: PropTypes.func.isRequired,
 }
 

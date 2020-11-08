@@ -22,12 +22,30 @@ const PostItem = ({
         </Link>
       </div>
       <div>
-      <p className="my-1">{area}</p>
-      <p className="my-1">{category}</p>
-      <p className="my-1">{kind}</p>
-      <p className="my-1">{country}</p>
-      <p className="my-1">{state}</p>
-      <p className="my-1">{proximity}</p>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th className="hide-sm">Good/Service</th>
+                        <th className="hide-sm">Have/Want</th>
+                        <th className="hide-sm">Region</th>
+                        <th className="hide-sm">Country</th>
+                        <th className="hide-sm">State</th>
+                        <th className="hide-sm">Proximity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><strong>{category? category.toUpperCase() : ''}</strong></td>
+                  <td><strong>{kind ? kind.toUpperCase() : ''}</strong></td>
+                  <td><strong>{area ? area.toUpperCase() : ''}</strong></td>
+                  <td><strong>{country ? country : ''}</strong></td>
+                  <td><strong>{state ? state : ''}</strong></td>
+                  <td>{
+                    proximity ? (<small>Within {proximity} Miles of poster's location (see profile)</small>) : ''
+                  }</td>
+                </tr>
+              </tbody>
+            </table>
         <p className="my-1">{text}</p>
         <p className="post-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>

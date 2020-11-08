@@ -25,7 +25,12 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
         <Fragment>
         <div>
             <Link to={`/profile/${profile._id}`} className="btn btn-primary">
-                View Profile
+                View My Profile
+            </Link>
+        </div>
+        <div>
+            <Link to={`/create-post`} className="btn btn-primary">
+                Post Something
             </Link>
         </div>
             <DashboardActions/>

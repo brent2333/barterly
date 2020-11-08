@@ -9,7 +9,7 @@ const CreateProfile = ({ createProfile, history }) => {
     const [formData, setFormData] = useState({
         website: '',
         bio: '',
-        file: {}
+        file: ''
     });
     const {
         website,

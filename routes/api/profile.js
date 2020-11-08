@@ -85,14 +85,16 @@ router.post('/', [upload.single('file'), auth], async (req, res) => {
     profileFields.wants = Array.isArray(wants) ? wants : [];
 
     try {
-        const { path, mimetype } = req.file;
-        const file = new File({
-          file_path: path,
-          file_mimetype: mimetype
-        });
-        await file.save();
-        const profileImage = req.file.filename;
-        profileFields.profileImage = profileImage;
+        if (req.file) {
+            const { path, mimetype } = req.file;
+            const file = new File({
+              file_path: path,
+              file_mimetype: mimetype
+            });
+            await file.save();
+            const profileImage = req.file.filename;
+            profileFields.profileImage = profileImage;
+        }
         let profile = await Profile.findOne({ user: req.user.id });
         if (profile) {
             //update

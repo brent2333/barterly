@@ -39,7 +39,7 @@ const Wants = ({ wants, deleteWants }) => {
 }
 
 Wants.propTypes = {
-    have: PropTypes.array.isRequired,
+    want: PropTypes.array,
     deleteWants: PropTypes.func.isRequired,
 }
 

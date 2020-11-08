@@ -3,49 +3,54 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegionForm  from './RegionForm';
 import { addPost } from '../../actions/post';
+import { setAlert } from '../../actions/alert';
 
 const PostForm = ({ addPost }) => {
   const [formData, setFormData] = useState({
     text: '',
     category: '',
     kind: '',
-    area: '',
-    country: '',
-    state: '',
-    proximity: ''
 });
 
 const {
     text,
     category,
-    kind,
-    area,
-    country,
-    state,
-    proximity
+    kind
+
 } = formData;
 const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 const onCheck = e => setFormData({ ...formData, [e.target.name]: e.target.id });
 const [showRegion, openRegionForm] = useState(false);
 const openRegion = () => openRegionForm(showRegion => true);
 const closeRegion = () => openRegionForm(showRegion => false);
+let countryTemp = '';
+let stateTemp = '';
+let proximityTemp = '';
 const addServiceArea = (e, data) => {
   e.preventDefault();
   for (const d in data) {
+    console.log('LOOP REGION DATA', d, data[d]);
     switch(d) {
       case 'country':
-        formData.country = data[d];
+        countryTemp = data[d];
       break;
       case 'state':
-        formData.state = data[d];
+        stateTemp = data[d];
       break;
       case 'proximity':
-        formData.proximity = data[d];
+        proximityTemp = data[d];
       break;
       default:
       break;
     }
   }
+  setAlert('Region Data Added', 'success');
+}
+const collectFormData = () => {
+  formData.country = countryTemp;
+  formData.state = stateTemp;
+  formData.proximity = proximityTemp;
+  addPost(formData);
 }
 
   return (
@@ -57,7 +62,7 @@ const addServiceArea = (e, data) => {
         className="form my-1"
         onSubmit={(e) => {
           e.preventDefault();
-          addPost({ text, category, kind, country, state, proximity, area });
+          collectFormData();
         }}
       >
         <div className="form-group">
