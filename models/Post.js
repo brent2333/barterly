@@ -10,10 +10,6 @@ const PostSchema = new Schema({
         type: String,
         required: true,
     },
-    goodsServices:{
-        type: String,
-        required: true,
-    }, 
     category: {
         type: String,
         required: true,
@@ -55,28 +51,20 @@ const PostSchema = new Schema({
             }
         }
     ],
-    serviceArea: {
-        kind: {
+        area: {
           type: String
         },
-        location: {
+
           country:  {
             type: String
           },
-          zip: {
-            type: String
-          },
-          city: {
-            type: String
-          }, 
+ 
           state:  {
             type: String
-          }
-        },
+          },
         proximity:  {
           type: String
-        }
-      },
+        },
     date: {
         type: Date,
         default: Date.now

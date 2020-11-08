@@ -22,8 +22,11 @@ router.post('/', [auth, [
         const newPost = new Post({
             text: req.body.text,
             kind: req.body.kind,
-            goodsServices: req.body.goodsServices,
             category: req.body.category,
+            area: req.body.area,
+            country: req.body.country,
+            state: req.body.state,
+            proximity: req.body.proximity,
             name: user.name,
             user: req.user.id
         });

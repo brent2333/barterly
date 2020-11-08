@@ -10,18 +10,24 @@ const PostItem = ({
   addLike,
   removeLike,
   deletePost,
-  post: { _id, text, name, user, likes, comments, date },
+  post: { _id, text, name, user, likes, comments, date, kind, category, area, country, state, proximity },
   showActions
 }) => {
   return (
     <div className="post bg-light p-1 my-1">
       <div>
         <Link to={`/profile/${user}`}>
-          <img className="round-img" alt="" />
+          {/* <img className="round-img" alt="" /> */}
           <h4>{name}</h4>
         </Link>
       </div>
       <div>
+      <p className="my-1">{area}</p>
+      <p className="my-1">{category}</p>
+      <p className="my-1">{kind}</p>
+      <p className="my-1">{country}</p>
+      <p className="my-1">{state}</p>
+      <p className="my-1">{proximity}</p>
         <p className="my-1">{text}</p>
         <p className="post-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>

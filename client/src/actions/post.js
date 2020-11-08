@@ -70,6 +70,7 @@ export const deletePost = id => async dispatch => {
   };
 
   export const addPost = formData => async dispatch => {
+    console.warn('addPost', formData);
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -129,7 +130,7 @@ export const deletePost = id => async dispatch => {
   export const deleteComment = (postId, commentId) => async dispatch => {
 
     try {
-      const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+      await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
       dispatch({
         type: REMOVE_COMMENT,
         payload: commentId
