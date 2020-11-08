@@ -5,6 +5,8 @@
   --light-color: #f4f4f4;
   --danger-color: #f54d28;
   --success-color: #28a745;
+  --light-orange: #efb270;
+  --light-green: #beef7f;
 }
 
 * {
@@ -143,6 +145,14 @@ th {
   outline: none;
 }
 
+.btn-lt-orange {
+  background: var(--light-orange);
+}
+
+.btn-lt-green {
+  background: var(--light-green);
+}
+
 .badge {
   font-size: 0.8rem;
   padding: 0.1rem;
@@ -230,12 +240,19 @@ th {
 
 /* Overlay */
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  /* background-color: rgba(0, 0, 0, 0.7); */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background:
+  radial-gradient(black 15%, transparent 16%) 0 0,
+  radial-gradient(black 15%, transparent 16%) 8px 8px,
+  radial-gradient(rgba(31, 34, 68, 0.1) 15%, transparent 20%) 0 1px,
+  radial-gradient(rgba(22, 22, 58, 0.1) 15%, transparent 20%) 8px 9px;
+  background-color:#1d1c1c;
+  background-size:16px 16px;
 }
 
 /* Forms */
