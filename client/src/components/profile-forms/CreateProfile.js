@@ -101,7 +101,7 @@ const CreateProfile = ({ createProfile, history }) => {
                     </div>
                     ) : (
                     <div className="preview-message">
-                        <p>No preview available for this file</p>
+                        <p>No preview available for this file(s)</p>
                     </div>
                     )
                 ) : (

@@ -16,9 +16,6 @@ app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/upload', require('./routes/api/file'));
 
-// TODO: REMOVE THIS BEFORE DEPLOYMENT!!!
-app.get('/', (req, res) => res.send('API running'));
-
 //serve static assets in prod
 if(process.env.NODE_ENV === 'production') {
   //set static folder
