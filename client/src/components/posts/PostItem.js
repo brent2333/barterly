@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
@@ -13,6 +13,7 @@ const PostItem = ({
   post: { _id, text, name, user, likes, comments, date, kind, category, area, country, state, proximity },
   showActions
 }) => {
+  
   return (
     <div className="post bg-light p-1 my-1">
       <div>
@@ -22,22 +23,22 @@ const PostItem = ({
         </Link>
       </div>
       <div>
-            <table className="table">
+            <table className="table post-table">
                 <thead>
                     <tr>
-                        <th className="hide-sm">Good/Service</th>
-                        <th className="hide-sm">Have/Want</th>
-                        <th className="hide-sm">Region</th>
-                        <th className="hide-sm">Country</th>
-                        <th className="hide-sm">State</th>
-                        <th className="hide-sm">Proximity</th>
+                        <th className="hide-sm">Good or Service</th>
+                        <th className="hide-sm">Have or Want</th>
+                        <th className="hide-sm">{area ? 'Where?' : ''}</th>
+                        <th className="hide-sm">{country ? 'Country' : ''}</th>
+                        <th className="hide-sm">{state ? 'State' : ''}</th>
+                        <th className="hide-sm">{proximity ? 'Proximity' : ''}</th>
                     </tr>
                 </thead>
                 <tbody>
                 <tr>
                   <td><strong>{category? category.toUpperCase() : ''}</strong></td>
                   <td><strong>{kind ? kind.toUpperCase() : ''}</strong></td>
-                  <td><strong>{area ? area.toUpperCase() : ''}</strong></td>
+                  <td><strong>{area ? area : ''}</strong></td>
                   <td><strong>{country ? country : ''}</strong></td>
                   <td><strong>{state ? state : ''}</strong></td>
                   <td>{

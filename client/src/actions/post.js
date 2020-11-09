@@ -85,6 +85,7 @@ export const deletePost = id => async dispatch => {
   };
 
   export const addPost = formData => async dispatch => {
+    console.warn('addPost', formData);
     const config = {
       headers: {
         'Content-Type': 'application/json'

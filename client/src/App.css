@@ -328,6 +328,15 @@ button {
   background: var(--light-color);
 }
 
+.table.post-table th {
+  padding: 0.25rem 1rem;
+  color: var(--primary-color);
+}
+
+.table.post-table td {
+  padding: 0.25rem 1rem;
+}
+
 /* Navbar */
 .navbar {
   display: flex;
@@ -599,6 +608,7 @@ blockquote {
     position: relative;
     grid-template-columns: 1fr;
     text-align: center;
+    padding-top: 68px;
   }
 
   .profile ul {
@@ -609,7 +619,7 @@ blockquote {
 
   .profile-top img,
   .profile img {
-    width: 200px;
+    width: auto;
     margin: auto;
   }
 
@@ -638,6 +648,16 @@ blockquote {
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+
+  .post > div:first-child {
+    text-align: left;
+    height: 20px;
+  }
+
+  .table.post-table td {
+    font-size:3vw;
+    padding: 1vw;
   }
 }
 

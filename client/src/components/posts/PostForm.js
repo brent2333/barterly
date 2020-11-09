@@ -28,6 +28,13 @@ const {
 } = formData;
 const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 const onCheck = e => setFormData({ ...formData, [e.target.name]: e.target.id });
+const onArea = e => {
+  if (e.target.id === 'mylocation') {
+    setFormData({ ...formData, area: 'My Location (see profile)' });
+  } else {
+    setFormData({ ...formData, area: e.target.id.toUpperCase() })
+  }
+}
 const [showRegion, openRegionForm] = useState(false);
 const openRegion = () => openRegionForm(showRegion => true);
 const closeRegion = () => openRegionForm(showRegion => false);
@@ -85,18 +92,18 @@ const closeRegion = () => openRegionForm(showRegion => false);
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
             <label className="btn btn-lt-green">
               <input type="radio" name="area" id="regional"
-              onChange={(e) => onCheck(e)}
+              onChange={(e) => onArea(e)}
               onClick={openRegion}/> Regional
             </label>
             <label className="btn btn-lt-orange">
               <input type="radio" name="area" id="mylocation"
-              onChange={(e) => onCheck(e)}
+              onChange={(e) => onArea(e)}
               onClick={closeRegion}
               /> At My Location
             </label>
             <label className="btn btn-lt-yellow">
               <input type="radio" name="area" id="worldwide"
-              onChange={(e) => onCheck(e)}
+              onChange={(e) => onArea(e)}
               onClick={closeRegion}/> Wordlwide
             </label>
           </div>
