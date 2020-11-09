@@ -27,6 +27,9 @@ const ProfileItem = ({ addFollow, profile: {
                 <Link to={`/profile/${_id}`} className="btn btn-primary">
                     View Profile
                 </Link>
+                <Link to={`userposts/${_id}`} className="btn btn-primary">
+                    View Posts
+                </Link>
             </div>
             <ul>
                 {/* {skills.slice(0,4).map((skill, index) => (

@@ -27,6 +27,9 @@ const ProfileItem = ({ deleteFollow, profile: {
                 <Link to={`/profile/${user._id}`} className="btn btn-primary">
                     View Profile
                 </Link>
+                <Link to={`userposts/${_id}`} className="btn btn-primary">
+                    View Posts
+                </Link>
             </div>
             <ul>
             </ul>

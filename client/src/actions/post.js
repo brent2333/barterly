@@ -1,12 +1,27 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_POSTS, GET_POST, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, ADD_COMMENT, REMOVE_COMMENT } from './types';
+import { GET_POSTS, GET_USER_POSTS, GET_POST, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, ADD_COMMENT, REMOVE_COMMENT } from './types';
 
 export const getPosts = () => async (dispatch) => {
   try {
     const res = await axios.get('api/posts');
     dispatch({
       type: GET_POSTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const getPostsByUser = id => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/posts/user/${id}`);
+    dispatch({
+      type: GET_USER_POSTS,
       payload: res.data
     });
   } catch (err) {

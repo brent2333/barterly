@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_POST, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, ADD_COMMENT, REMOVE_COMMENT } from '../actions/types';
+import { GET_POSTS, GET_USER_POSTS, GET_POST, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, ADD_COMMENT, REMOVE_COMMENT } from '../actions/types';
 
 const initialState = {
   posts: [],
@@ -12,6 +12,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_POSTS:
+      case GET_USER_POSTS:
       return {
         ...state,
         posts: payload,

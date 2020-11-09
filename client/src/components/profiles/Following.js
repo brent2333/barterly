@@ -8,7 +8,6 @@ const Following = ({ getFollowing, auth: { user }, profile: {profiles, loading} 
     useEffect(() =>{
         getFollowing();
     }, [getFollowing]);
-    console.log('$$$$$$', profiles.length);
     return (
         <Fragment>
             { loading ? <Spinner /> : <Fragment>
