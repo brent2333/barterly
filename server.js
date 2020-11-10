@@ -34,8 +34,8 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 aws.config.region = 'us-east-1';
 
 
-// const S3_BUCKET = process.env.S3_BUCKET;
-const S3_BUCKET = 'barterly';
+const S3_BUCKET = process.env.S3_BUCKET;
+// const S3_BUCKET = 'barterly';
 
 /*
  * Respond to GET requests to /sign-s3.
