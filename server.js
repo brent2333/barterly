@@ -49,7 +49,7 @@ app.get('/sign-s3', (req, res) => {
   const s3Params = {
     Bucket: S3_BUCKET,
     Key: fileName,
-    Expires: 6000x,
+    Expires: 6000,
     ContentType: fileType,
     ACL: 'public-read'
   };
