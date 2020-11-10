@@ -43,7 +43,7 @@ const CreateProfile = ({ createProfile, history }) => {
     const getSignedRequest = (file) => {
         const xhr = new XMLHttpRequest();
         let fileType = encodeURIComponent(file.type);
-        xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${fileType}`);
+        xhr.open('GET', `/upload/sign-s3?file-name=${file.name}&file-type=${fileType}`);
         xhr.setRequestHeader('Accept', 'application/json');
         xhr.onreadystatechange = () => {
           if(xhr.readyState === 4){

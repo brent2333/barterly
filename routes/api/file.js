@@ -3,6 +3,8 @@ const express = require('express');
 const multer = require('multer');
 const File = require('../../models/File');
 const Router = express.Router();
+const aws = require('aws-sdk');
+
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -76,6 +78,36 @@ Router.get('/download/:id', async (req, res) => {
   } catch (error) {
     res.status(400).send('Error while downloading file. Try again later.');
   }
+});
+
+aws.config.region = 'us-east-1';
+// const S3_BUCKET = process.env.S3_BUCKET;
+const S3_BUCKET = 'barterly';
+
+Router.get('/sign-s3', (req, res) => {
+  const s3 = new aws.S3();
+  const fileName = req.query['file-name'];
+  const fileType = req.query['file-type'];
+  const s3Params = {
+    Bucket: S3_BUCKET,
+    Key: fileName,
+    Expires: 6000,
+    ContentType: fileType,
+    ACL: 'public-read'
+  };
+  console.log('$$$$$$$ SIGNs3', s3Params);
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    if(err){
+      console.log('$$$$$$$ getSignedUrl putObject', err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+    };
+    res.write(JSON.stringify(returnData));
+    res.end();
+  });
 });
 
 module.exports = Router;
