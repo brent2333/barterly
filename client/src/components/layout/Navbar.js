@@ -15,6 +15,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout, history}) => {
   const guestLinks = (
     <ul>
         <li>
+          <Link to='/sendmail'>
+            Send Mail
+          </Link>
+        </li>
+        <li>
           <Link to='/members'>
             Members
           </Link>

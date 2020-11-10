@@ -16,6 +16,7 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/upload', require('./routes/api/file'));
+app.use('/api/mail', require('./routes/api/mail'));
 
 //serve static assets in prod
 if(process.env.NODE_ENV === 'production') {

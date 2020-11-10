@@ -95,10 +95,8 @@ Router.get('/sign-s3', (req, res) => {
     ContentType: fileType,
     ACL: 'public-read'
   };
-  console.log('$$$$$$$ SIGNs3', s3Params);
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if(err){
-      console.log('$$$$$$$ getSignedUrl putObject', err);
       return res.end();
     }
     const returnData = {

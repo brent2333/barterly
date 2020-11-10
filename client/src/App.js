@@ -16,6 +16,8 @@ import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import PostsByUser from './components/posts/PostsByUser';
 import PostForm from './components/posts/PostForm';
+import EmailPoster from './components/posts/EmailPoster';
+
 import Post from './components/post/Post';
 import AddHaves from './components/profile-forms/AddHaves';
 import AddWants from './components/profile-forms/AddWants';
@@ -62,6 +64,7 @@ const App = () => {
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/userposts/:id" component={PostsByUser} />
           <PrivateRoute exact path="/posts/:id" component={Post} />
+          <Route exact path="/sendmail" component={EmailPoster} />
         </Switch>
       </section>
     </Fragment>
