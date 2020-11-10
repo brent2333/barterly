@@ -115,7 +115,7 @@ const closeRegion = () => openRegionForm(showRegion => false);
                 onChange={(e) => onChange(e)}>
             <option></option>
             { countries.map(country => (
-                <option value={country.code} key={country.code}>{country.name}</option>
+                <option value={country.name} key={country.code}>{country.name}</option>
             ))}
             </select>
             </div>

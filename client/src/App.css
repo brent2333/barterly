@@ -169,6 +169,18 @@ th {
   background: var(--light-yellow);
 }
 
+.profile-item-buttons {
+  margin-top: 60px;
+}
+
+.profile-item-buttons a {
+  float: right;
+  margin-bottom: 10px;
+  display: block;
+  text-align: center;
+  width: 130px;
+}
+
 .badge {
   font-size: 0.8rem;
   padding: 0.1rem;
@@ -405,7 +417,7 @@ blockquote {
 
 .profiles .profile button {
   position: absolute;
-  right: 20px;
+  right: 16px;
   top: 20px;
 }
 

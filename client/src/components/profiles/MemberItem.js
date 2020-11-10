@@ -24,44 +24,34 @@ const ProfileItem = ({ addFollow, profile: {
             <div>
                 <h2>{user.name}</h2>
                 {location && (
+                    <div>
+                        <h4 className="text-primary">Location</h4>
                     <p>
                         <span>{location.country ? location.country : ''}</span>{' '}
                         <span>{location.state ? location.state : ''}</span>{' '}
                         <span>{location.zip ? location.zip : ''}</span>
                     </p>
+                    </div>
                 )} 
                 <p>{bio}</p><br></br>
                 {
-                    website ? (<p><a href={website} target="_blank" rel="noreferrer">Website</a></p>) : ''
+                    website ? (<p><i className="fas fa-globe"></i> <a href={website} target="_blank" rel="noreferrer">Website</a></p>) : ''
                 }
+            </div>
+            <div>
                 <div>
                 {haves.length > 0 ? <h4 className="text-primary">Haves</h4> : ''}
                     {haves && haves.map(have => (
-                            <p>{have.description}</p>
+                        <p>{have.description}</p>
                     ))}
                 </div>
                 <div>
                 {wants.length > 0 ? <h4 className="text-primary">Wants</h4> : ''}
                     {wants && wants.map(want => (
-                            <p>{want.description}</p>
+                        <p>{want.description}</p>
                     ))}
                 </div>
-         
             </div>
-            <div className="profile-item-buttons">
-                <Link to={`/profile/${_id}`} className="btn btn-primary">
-                    View Profile
-                </Link>
-                <Link to={`userposts/${_id}`} className="btn btn-primary">
-                    View Posts
-                </Link>  
-            </div>
-            <button 
-                className="btn btn-primary"
-                onClick={(e) => addFollow(_id)}
-                >
-                <i className="fas fa-user-plus"></i> Follow
-            </button>
         </div>
     )
 }

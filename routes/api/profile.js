@@ -133,11 +133,7 @@ router.delete('/', auth, async (req,res) => {
 // @desc    Add profile location
 // @access  Private
 router.put('/location', [auth, [
-    check('country', 'Country is required').not().isEmpty(),
-    check('zip', 'Zip is required').not().isEmpty(),
-    check('state', 'State is required').not().isEmpty(),
-
-
+    check('country', 'Country is required').not().isEmpty()
 ]], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -327,7 +323,7 @@ router.get('/follows', auth, async (req,res) => {
         profile.following.map(p => {
             profileArray.push(p.userProfileId);
         });
-        const follows = await Profile.find({_id: {$in: profileArray }});
+        const follows = await Profile.find({_id: {$in: profileArray }}).populate('user', ['name']);
         res.json(follows);
     } catch (err) {
         console.error(err.message);

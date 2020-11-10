@@ -9,31 +9,53 @@ const ProfileItem = ({ deleteFollow, profile: {
     _id,
     website,
     bio,
-    profileImage
+    profileImage,
+    haves,
+    wants,
+    location
 }}) => {
     return (
         <div className="profile bg-light">
             <div>
             {
-               profileImage ? (<img src={`/files/${profileImage}`} height="200" alt="" className="round-img"/>) : ''
+               profileImage ? (<img src={profileImage} height="200" alt="" className="round-img"/>) : ''
             }
             </div>
             <div>
                 <h2>{user.name}</h2>
-                <p>{bio}</p>
+                {location && (
+                    <p>
+                        <span>{location.country ? location.country : ''}</span>{' '}
+                        <span>{location.state ? location.state : ''}</span>{' '}
+                        <span>{location.zip ? location.zip : ''}</span>
+                    </p>
+                )} 
+                <p>{bio}</p><br></br>
                 {
                     website ? (<p><a href={website} target="_blank" rel="noreferrer">Website</a></p>) : ''
                 }
-                {/* <p className="my-1">{location && <span>{location}</span>}</p> */}
-                <Link to={`/profile/${user._id}`} className="btn btn-primary">
+                <div>
+                {haves.length > 0 ? <h4 className="text-primary">Haves</h4> : ''}
+                    {haves && haves.map(have => (
+                            <p>{have.description}</p>
+                    ))}
+                </div>
+                <div>
+                {wants.length > 0 ? <h4 className="text-primary">Wants</h4> : ''}
+                    {wants && wants.map(want => (
+                            <p>{want.description}</p>
+                    ))}
+                </div>
+         
+            </div>
+            <div className="profile-item-buttons">
+                <Link to={`/profile/${_id}`} className="btn btn-primary">
                     View Profile
                 </Link>
                 <Link to={`userposts/${_id}`} className="btn btn-primary">
                     View Posts
-                </Link>
+                </Link>  
             </div>
-            <ul>
-            </ul>
             <button 
                 className="btn btn-danger"
                 onClick={(e) => deleteFollow(_id)}

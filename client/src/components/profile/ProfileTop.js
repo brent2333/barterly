@@ -14,9 +14,13 @@ const ProfileTop = ({
     <div className="profile-top p-2">
       <img className="round-img my-1" height="200" src={profileImage} alt="" />
       <h1 className="large">{name}</h1>
+      {location && (
       <p className="lead">
-        {location && <span> at {location.country}, {location.state}, {location.zip}</span>}
+        <span>{location.country ? location.country : ''}</span>{' '}
+        <span>{location.state ? location.state : ''}</span>{' '}
+        <span>{location.zip ? location.zip : ''}</span>
       </p>
+      )}
       <div className="icons my-1">
         {website && (
           <a href={website} target="_blank" rel="noopener noreferrer">

@@ -35,6 +35,7 @@ const CreateProfile = ({ createProfile, history }) => {
             }
             else{
               alert('Could not upload file.');
+              console.error('Could not upload file.');
             }
           }
         };
@@ -52,7 +53,8 @@ const CreateProfile = ({ createProfile, history }) => {
               uploadFile(file, response.signedRequest, response.url);
             }
             else{
-              alert('Could not get signed URL.');
+              alert('We\'re sorry. THere is a problem with adding the image');
+              console.error('Could not get signed URL');
             }
           }
         };

@@ -6,17 +6,22 @@ import { logout } from '../../actions/auth';
 import handshake from '../../img/handshake.svg';
 
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading }, logout, history}) => {
+  const doLogout = (event) => {
+    event.preventDefault();
+    logout();
+    window.location = '/';
+  }
   const guestLinks = (
     <ul>
         <li>
-          <Link to='/profiles'>
+          <Link to='/members'>
             Members
           </Link>
         </li>
         <li>
           <Link to="/register">
-            Register
+            Sign Up
           </Link>
         </li>
       <li>
@@ -30,7 +35,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <ul>
         <li>
           <Link to='/profiles'>
-            Members
+            Profiles
           </Link>
         </li>
         <li>
@@ -45,7 +50,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           </Link>
         </li>
       <li>
-        <a onClick={logout} >
+        <a onClick={e => doLogout(e)} href="!#">
         <i className="fas fa-sign-out-alt"></i>{' '}
         <span className="hide-sm">Logout</span>
         </a>

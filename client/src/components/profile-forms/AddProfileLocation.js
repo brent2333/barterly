@@ -73,11 +73,11 @@ const AddProfileLocation = ({ addProfileLocation, history }) => {
                 onChange={(e) => onChange(e)}>
             <option></option>
             { countries.map(country => (
-                <option value={country.code} key={country.code}>{country.name}</option>
+                <option value={country.name} key={country.code}>{country.name}</option>
             ))}
             </select>
             </div>
-            <div className={country === 'US' ? 'show' : 'hide'}>
+            <div className={country === 'United States' ? 'show' : 'hide'}>
             <label>State</label>
             <select name="state"
             onChange={(e) => onChange(e)}>
