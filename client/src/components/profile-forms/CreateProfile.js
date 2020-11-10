@@ -44,6 +44,7 @@ const CreateProfile = ({ createProfile, history }) => {
         const xhr = new XMLHttpRequest();
         let fileType = encodeURIComponent(file.type);
         xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${fileType}`);
+        xhr.setRequestHeader('Accept', 'application/json');
         xhr.onreadystatechange = async () => {
           if(xhr.readyState === 4){
             if(xhr.status === 200){
