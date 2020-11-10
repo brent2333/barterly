@@ -579,7 +579,9 @@ blockquote {
     font-size: 1rem;
   }
 
-
+  .btn {
+    margin-bottom: 0.5rem;
+  }
   /* Navbar */
   .navbar {
     display: block;
@@ -593,6 +595,7 @@ blockquote {
 
   .navbar h1 {
     margin-bottom: 1rem;
+    margin-left: -60px;
   }
 
   .navbar .welcome {

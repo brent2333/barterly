@@ -60,11 +60,10 @@ export const getProfileById = userId => async dispatch => {
 }
 
 export const createProfile = (formData, history, edit = false) => async dispatch => {
-    console.log('createProfile', formData);
     try {
         const config = {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         }
 

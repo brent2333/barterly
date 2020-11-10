@@ -15,7 +15,7 @@ const ProfileTop = ({
 }) => {
   return (
     <div className="profile-top p-2">
-      <img className="round-img my-1" height="200" src={`/files/${profileImage}`} alt="" />
+      <img className="round-img my-1" height="200" src={profileImage} alt="" />
       <h1 className="large">{name}</h1>
       <p className="lead">
         {status} {company && <span> at {company}</span>}

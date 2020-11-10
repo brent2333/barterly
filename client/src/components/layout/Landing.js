@@ -11,7 +11,6 @@ const Landing = ({ isAuthenticated }) => {
   }
     return (
         <section className="landing">
-        <div className="dark-overlay">
           <div className="landing-inner">
             <h1 className="x-large">Barterly</h1>
             <h4>Trade Goods and Services without hassle</h4><br/>
@@ -24,7 +23,6 @@ const Landing = ({ isAuthenticated }) => {
               <Link to="/login" className="btn btn-light">Login</Link>
             </div>
           </div>
-        </div>
       </section>
     )
 }

@@ -13,10 +13,11 @@ const ProfileItem = ({ addFollow, profile: {
 }}) => {
     return (
         <div className="profile bg-light">
+            <div>
             {
-               profileImage ? (<img src={`/files/${profileImage}`} height="200" alt="" className="round-img"/>) : ''
+               profileImage ? (<img src={profileImage} height="200" alt="" className="round-img"/>) : ''
             }
-            
+            </div>
             <div>
                 <h2>{user.name}</h2>
                 <p>{bio}</p>
@@ -32,11 +33,6 @@ const ProfileItem = ({ addFollow, profile: {
                 </Link>
             </div>
             <ul>
-                {/* {skills.slice(0,4).map((skill, index) => (
-                    <li key={index} className="text-primary">
-                        <i className="fas fa-check"></i> {skill}
-                    </li>
-                ))} */}
             </ul>
             <button 
                 className="btn btn-primary"

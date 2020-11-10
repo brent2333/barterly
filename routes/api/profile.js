@@ -57,8 +57,8 @@ const upload = multer({
     }
   });
 
-router.post('/', [upload.single('file'), auth], async (req, res) => {
-
+router.post('/', auth, async (req, res) => {
+    console.warn('REQ BODY', req.body);
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array()});
@@ -70,31 +70,34 @@ router.post('/', [upload.single('file'), auth], async (req, res) => {
         haves,
         wants,
         serviceArea,
-        file
+        profileImage
     } = req.body;
     // build profile object
     const profileFields = {
         user: req.user.id,
         website: website && website !== '' ? normalize(website, { forceHttps: true }) : '',
-        bio,
+        bio: bio,
         location,
         serviceArea,
+        profileImage: profileImage
       };
 
     profileFields.haves = Array.isArray(haves) ? haves : [];
     profileFields.wants = Array.isArray(wants) ? wants : [];
+    console.log('$$$$$ ', profileFields);
 
     try {
-        if (req.file) {
-            const { path, mimetype } = req.file;
-            const file = new File({
-              file_path: path,
-              file_mimetype: mimetype
-            });
-            await file.save();
-            const profileImage = req.file.filename;
-            profileFields.profileImage = profileImage;
-        }
+        // if (file) {
+        //     console.log('$$$$$ WE HAVE A FUCKING FILE', req.file)
+        //     // const { path, mimetype } = req.file;
+        //     // const file = new File({
+        //     //   file_path: path,
+        //     //   file_mimetype: mimetype
+        //     // });
+        //     // await file.save();
+        //     // const profileImage = req.file;
+        //     profileFields.profileImage = file;
+        // }
         let profile = await Profile.findOne({ user: req.user.id });
         if (profile) {
             //update

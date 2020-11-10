@@ -19,6 +19,44 @@ const CreateProfile = ({ createProfile, history }) => {
     const [file, setFile] = useState(null); // state for storing actual image
     const [previewSrc, setPreviewSrc] = useState(''); // state for storing previewImage
     const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
+    const uploadFile = (file, signedRequest, url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', signedRequest);
+        xhr.onreadystatechange = () => {
+          if(xhr.readyState === 4){
+            if(xhr.status === 200){
+              let formData = {
+                bio: bio,
+                website: website,
+                profileImage: url
+              }
+              createProfile(formData, history);
+              return url;
+            }
+            else{
+              alert('Could not upload file.');
+            }
+          }
+        };
+        xhr.send(file);
+      }
+    const getSignedRequest = (file) => {
+        const xhr = new XMLHttpRequest();
+        let fileType = encodeURIComponent(file.type);
+        xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${fileType}`);
+        xhr.onreadystatechange = async () => {
+          if(xhr.readyState === 4){
+            if(xhr.status === 200){
+              const response = JSON.parse(xhr.responseText);
+              uploadFile(file, response.signedRequest, response.url, formData);
+            }
+            else{
+              alert('Could not get signed URL.');
+            }
+          }
+        };
+        xhr.send();
+      }
     const dropRef = useRef(); // React ref for managing the hover state of droppable area
     const onDrop = (files) => {
         const [uploadedFile] = files;
@@ -44,17 +82,17 @@ const CreateProfile = ({ createProfile, history }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = e => {
         e.preventDefault();
-        const formData = new FormData();
 
         if (file) {
-            console.log("WE HAVE A FILE");
-            formData.append('file', file);
+            getSignedRequest(file, formData);
+        } else {
+            let formData = {
+                bio: bio,
+                website: website
+            }
+            createProfile(formData, history);
         }
 
-        formData.append('bio', bio);
-        formData.append('website', website);
-
-        createProfile(formData, history);
     }
     return (
         <Fragment>
