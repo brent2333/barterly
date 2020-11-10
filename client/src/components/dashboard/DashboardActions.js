@@ -10,6 +10,8 @@ const DashboardActions = () => {
           ><i className="fas fa-handshake text-primary"></i> Add Haves</Link>
         <Link to="/add-wants" className="btn btn-light"
           ><i className="fas fa-handshake text-primary"></i> Add Wants</Link>
+        <Link to="/add-location" className="btn btn-light"
+          ><i className="fas fa-handshake text-primary"></i> Add Location</Link>
       </div>
     )
 }

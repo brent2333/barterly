@@ -15,9 +15,6 @@ const ProfileSchema = new mongoose.Schema({
       zip: {
         type: String
       },
-      city: {
-        type: String
-      }, 
       state:  {
         type: String
       }

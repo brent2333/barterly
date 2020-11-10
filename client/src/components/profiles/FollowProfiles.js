@@ -13,10 +13,11 @@ const ProfileItem = ({ deleteFollow, profile: {
 }}) => {
     return (
         <div className="profile bg-light">
+            <div>
             {
                profileImage ? (<img src={`/files/${profileImage}`} height="200" alt="" className="round-img"/>) : ''
             }
-            
+            </div>
             <div>
                 <h2>{user.name}</h2>
                 <p>{bio}</p>

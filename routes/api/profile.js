@@ -30,32 +30,6 @@ router.get('/me', auth, async (req, res) => {
     }
 });
 
-// @route   POST api/profile/
-// @desc    Create or Update user profile
-// @access  Private
-const upload = multer({
-    storage: multer.diskStorage({
-      destination(req, file, cb) {
-        cb(null, './client/public/files');
-      },
-      filename(req, file, cb) {
-        cb(null, `${new Date().getTime()}_${file.originalname}`);
-      }
-    }),
-    limits: {
-      fileSize: 1000000 // max file size 1MB = 1000000 bytes
-    },
-    fileFilter(req, file, cb) {
-      if (!file.originalname.match(/\.(jpeg|jpg|png)$/)) {
-        return cb(
-          new Error(
-            'only upload files with jpg, jpeg and png format.'
-          )
-        );
-      }
-      cb(undefined, true); // continue with upload
-    }
-  });
 
 router.post('/', auth, async (req, res) => {
     const errors = validationResult(req);
@@ -85,17 +59,6 @@ router.post('/', auth, async (req, res) => {
     profileFields.wants = Array.isArray(wants) ? wants : [];
 
     try {
-        // if (file) {
-        //     console.log('$$$$$ WE HAVE A FUCKING FILE', req.file)
-        //     // const { path, mimetype } = req.file;
-        //     // const file = new File({
-        //     //   file_path: path,
-        //     //   file_mimetype: mimetype
-        //     // });
-        //     // await file.save();
-        //     // const profileImage = req.file;
-        //     profileFields.profileImage = file;
-        // }
         let profile = await Profile.findOne({ user: req.user.id });
         if (profile) {
             //update
@@ -172,7 +135,6 @@ router.delete('/', auth, async (req,res) => {
 router.put('/location', [auth, [
     check('country', 'Country is required').not().isEmpty(),
     check('zip', 'Zip is required').not().isEmpty(),
-    check('city', 'City is required').not().isEmpty(),
     check('state', 'State is required').not().isEmpty(),
 
 

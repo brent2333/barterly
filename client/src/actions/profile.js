@@ -176,7 +176,7 @@ export const deleteWants = id => async dispatch => {
     }
 }
 
-export const addLocation = (formData, history) => async dispatch => {
+export const addProfileLocation = (formData, history) => async dispatch => {
     try {
         const config = {
             headers: {

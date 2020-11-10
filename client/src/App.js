@@ -18,6 +18,7 @@ import PostForm from './components/posts/PostForm';
 import Post from './components/post/Post';
 import AddHaves from './components/profile-forms/AddHaves';
 import AddWants from './components/profile-forms/AddWants';
+import AddProfileLocation from './components/profile-forms/AddProfileLocation';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Login from './components/auth/Login';
 // Redux
@@ -54,6 +55,7 @@ const App = () => {
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
           <PrivateRoute exact path="/add-haves" component={AddHaves} />
           <PrivateRoute exact path="/add-wants" component={AddWants} />
+          <PrivateRoute exact path="/add-location" component={AddProfileLocation} />
           <PrivateRoute exact path="/create-post" component={PostForm} />
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/userposts/:id" component={PostsByUser} />
