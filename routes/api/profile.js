@@ -58,7 +58,6 @@ const upload = multer({
   });
 
 router.post('/', auth, async (req, res) => {
-    console.warn('REQ BODY', req.body);
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array()});
@@ -84,7 +83,6 @@ router.post('/', auth, async (req, res) => {
 
     profileFields.haves = Array.isArray(haves) ? haves : [];
     profileFields.wants = Array.isArray(wants) ? wants : [];
-    console.log('$$$$$ ', profileFields);
 
     try {
         // if (file) {
