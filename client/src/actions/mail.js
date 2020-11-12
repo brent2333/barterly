@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { SEND_MAIL, MAIL_ERROR} from './types';
 
-export const sendMail = () => async (dispatch) => {
-  console.log('$$$$$ SEND MAIL');
+export const sendMail = (mailData) => async (dispatch) => {
     try {
-      await axios.post('api/mail');
+      await axios.post('/api/mail/', mailData);
       dispatch({
-        type: SEND_MAIL
+        type: SEND_MAIL,
+        payload: mailData
       });
     } catch (err) {
       dispatch({

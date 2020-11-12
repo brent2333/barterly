@@ -286,10 +286,10 @@ router.put('/follow', auth, async (req, res) => {
         }
 
         followee.followers.unshift(newFollower);
-        console.log('PROFILE', profile);
-        console.log('NEW FOLLOWER',newFollower);
-        console.log('FOLLOWEE', followee);
-        console.log('followee.followers',followee.followers);
+        // console.log('PROFILE', profile);
+        // console.log('NEW FOLLOWER',newFollower);
+        // console.log('FOLLOWEE', followee);
+        // console.log('followee.followers',followee.followers);
 
         const {
             userProfileId

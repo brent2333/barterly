@@ -635,6 +635,7 @@ blockquote {
   .profile-top img,
   .profile img {
     width: auto;
+    max-width: 200px;
     margin: auto;
   }
 

@@ -1,11 +1,13 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { addLike, removeLike, deletePost } from '../../actions/post';
+import { sendMail } from '../../actions/mail';
 
 const PostItem = ({
+  sendMail,
   auth,
   addLike,
   removeLike,
@@ -13,12 +15,19 @@ const PostItem = ({
   post: { _id, text, name, user, likes, comments, date, kind, category, area, country, state, proximity },
   showActions
 }) => {
+
+  const doMail = (to, from) => {
+    const mailData = {
+        to: to,
+        from: from
+    }
+    sendMail(mailData);
+}
   
   return (
     <div className="post bg-light p-1 my-1">
       <div>
         <Link to={`/profile/${user}`}>
-          {/* <img className="round-img" alt="" /> */}
           <h4>{name}</h4>
         </Link>
       </div>
@@ -83,6 +92,15 @@ const PostItem = ({
                 <i className="fas fa-times"></i>
               </button>
             )}
+            {!auth.loading && user && (
+              <button
+              onClick={(e) => doMail(user, auth.user)}
+                type="button"
+                className="btn btn-primary"
+              >
+                <i className="fas fa-envelope"></i> Email Poster
+              </button>
+            )}
           </Fragment>
         )}
       </div>
@@ -97,11 +115,12 @@ PostItem.propTypes = {
   auth: PropTypes.object.isRequired,
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired
+  deletePost: PropTypes.func.isRequired,
+  sendMail: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
   auth: state.auth
 });
-export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
+export default connect(mapStateToProps, { addLike, sendMail, removeLike, deletePost })(
   PostItem
 );

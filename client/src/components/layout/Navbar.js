@@ -15,11 +15,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout, history}) => {
   const guestLinks = (
     <ul>
         <li>
-          <Link to='/sendmail'>
-            Send Mail
-          </Link>
-        </li>
-        <li>
           <Link to='/members'>
             Members
           </Link>
@@ -59,7 +54,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout, history}) => {
         <i className="fas fa-sign-out-alt"></i>{' '}
         <span className="hide-sm">Logout</span>
         </a>
-        </li>
+      </li>
     </ul>
   );
     return (
