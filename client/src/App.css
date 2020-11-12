@@ -20,9 +20,7 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
   color: #ddd;
-  /*background: #f0efe7 url(./body.jpg);*/
   background:
   radial-gradient(black 15%, transparent 16%) 0 0,
   radial-gradient(black 15%, transparent 16%) 8px 8px,
@@ -559,6 +557,11 @@ blockquote {
 
 .dashwrap div {
   margin-bottom: 1rem;
+}
+
+.deal-textarea {
+  min-height: 200px;
+  min-width: 370px;
 }
 
 @media (max-width: 900px) {

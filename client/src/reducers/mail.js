@@ -12,12 +12,14 @@ export default function (state = initialState, action) {
     switch (type) {
           case SEND_MAIL:
           return {
-            ...state
+            ...state,
+            message: payload
           };
         case MAIL_ERROR:
             return {
               ...state,
-              error: payload};
+              error: payload
+            };
           default:
             return state;
         }
