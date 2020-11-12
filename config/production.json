@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://brent:L211f9twR@barterlycluster0.aanft.mongodb.net/barterly?retryWrites=true&w=majority",
-    "jwtSecret": "rothbard"
+    "jwtSecret": "rothbard",
+    "sender": "reasonevidence",
+    "senderPass": "Q211f9twR"
 }
