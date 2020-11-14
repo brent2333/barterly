@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_POSTS, GET_SCROLL_POSTS, GET_USER_POSTS, GET_POST, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, ADD_COMMENT, REMOVE_COMMENT } from './types';
+import { GET_POSTS, GET_SCROLL_POSTS, CLEAR_POSTS, GET_USER_POSTS, GET_POST, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, ADD_COMMENT, REMOVE_COMMENT } from './types';
 
 export const getPosts = () => async (dispatch) => {
   try {
@@ -38,6 +38,10 @@ export const getScrollPosts = scrollData => async (dispatch) => {
     });
   }
 };
+
+export const clearPosts = () => dispatch => {
+  dispatch({ type: CLEAR_POSTS });
+}
 
 export const getPostsByUser = id => async (dispatch) => {
   try {

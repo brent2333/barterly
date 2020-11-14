@@ -14,6 +14,7 @@ export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 export const GET_POSTS = 'GET_POSTS';
+export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const GET_SCROLL_POSTS = 'GET_SCROLL_POSTS';
 export const GET_USER_POSTS = 'GET_USER_POSTS';
 export const GET_POST = 'GET_POST';

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
-import { getScrollPosts } from '../../actions/post';
+import { getScrollPosts, clearPosts } from '../../actions/post';
 
-const Posts = ({ getScrollPosts , post: { posts, loading }}) => {
+const Posts = ({ getScrollPosts, clearPosts, post: { posts, loading }}) => {
 	const [isFetching, setIsFetching] = useState(false);
     const [page, setPage] = useState(10);
     const recordsPerPage = 10;
@@ -14,6 +14,9 @@ const Posts = ({ getScrollPosts , post: { posts, loading }}) => {
             recordsPerPage: recordsPerPage,
             recordsOffset: 0
         })
+        return () => {
+            clearPosts();
+        }
     },[]);
 
     useEffect(() => {
@@ -62,6 +65,7 @@ const Posts = ({ getScrollPosts , post: { posts, loading }}) => {
 
 Posts.propTypes = {
     getScrollPosts: PropTypes.func.isRequired,
+    clearPosts: PropTypes.func.isRequired,
     post: PropTypes.object.isRequired
 }
 
@@ -69,4 +73,4 @@ const mapStateToProps = state => ({
     post: state.post
 });
 
-export default connect(mapStateToProps, { getScrollPosts })(Posts);
+export default connect(mapStateToProps, { getScrollPosts, clearPosts })(Posts);
