@@ -38,8 +38,10 @@ const Posts = ({ getScrollPosts, clearPosts, post: { posts, loading }}) => {
     };
     
     useEffect(() => {
-		if (!isFetching) return;
-		fetchMoreListItems();
+        if (!isFetching) return;
+        setTimeout(() => {
+            fetchMoreListItems();
+        }, 1200);
 	}, [isFetching]);
 
 	const fetchMoreListItems = () => {
