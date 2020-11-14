@@ -55,6 +55,19 @@ router.get('/', auth, async (req,res) => {
     }
 });
 
+// @route   GET api/posts/scroll
+// @desc    Get all posts for infinite scroll
+// @access  Private
+router.post('/scroll', auth, async (req,res) => {
+    try {
+        const posts = await Post.find().limit(req.body.recordsPerPage).skip(req.body.recordsOffset);
+        res.json(posts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
 // @route   GET api/posts/user/:id
 // @desc    Get all posts by a user
 // @access  Private

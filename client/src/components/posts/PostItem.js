@@ -146,7 +146,7 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
                 type="button"
                 className="btn btn-primary"
               >
-                <i className="fas fa-envelope"></i> Email Poster <small>(under construction)</small>
+                <i className="fas fa-envelope"></i> Email Poster
               </button>
             )}
             <Modal

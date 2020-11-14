@@ -37,13 +37,13 @@ const ProfileItem = ({ addFollow, profile: {
                 <div>
                 {haves.length > 0 ? <h4 className="text-primary">Haves</h4> : ''}
                     {haves && haves.map(have => (
-                            <p>{have.description}</p>
+                            <p key={have._id}>{have.description}</p>
                     ))}
                 </div>
                 <div>
                 {wants.length > 0 ? <h4 className="text-primary">Wants</h4> : ''}
                     {wants && wants.map(want => (
-                            <p>{want.description}</p>
+                            <p key={want._id}>{want.description}</p>
                     ))}
                 </div>
          
