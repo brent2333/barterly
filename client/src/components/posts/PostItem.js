@@ -54,6 +54,7 @@ const {
     deal
 } = formData;
   const [modalIsOpen,setIsOpen] = React.useState(false);
+  const [emailError, setEmailError] = React.useState(false);
   function openModal() {
     setIsOpen(true);
   }
@@ -66,9 +67,18 @@ const {
   function closeModal(e){
     e.preventDefault();
     setIsOpen(false);
-    doMail(user, auth.user)
   }
 
+  function submitMail(e){
+    e.preventDefault();
+    if (!deal) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+      setIsOpen(false);
+      doMail(user, auth.user)
+    }
+  }
 const onChange = e => 
 setFormData({ ...formData, [e.target.name]: e.target.value });
   
@@ -156,12 +166,17 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
               style={customStyles}
               contentLabel="Example Modal"
             >
-
+              { emailError && (<div
+              className="alert alert-danger"
+              >
+                  Please enter some text
+              </div>)
+              }
               <a onClick={(e) => closeModal(e)} href="!#"><i className="fas fa-times"></i></a>
               <h3>Describe the deal you want to make. Only the member will see this.</h3>
               <form>
               <textarea className="deal-textarea" placeholder="" name="deal" value={deal} onChange={e => onChange(e)}></textarea><br></br>
-              <button className="btn btn-primary" onClick={closeModal}>Send your message</button>
+              <button className="btn btn-primary" onClick={submitMail}>Send your message</button>
               </form>
             </Modal>
           </Fragment>

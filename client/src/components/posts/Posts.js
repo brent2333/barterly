@@ -41,7 +41,7 @@ const Posts = ({ getScrollPosts, clearPosts, post: { posts, loading }}) => {
         if (!isFetching) return;
         setTimeout(() => {
             fetchMoreListItems();
-        }, 1200);
+        }, 600);
 	}, [isFetching]);
 
 	const fetchMoreListItems = () => {

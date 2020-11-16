@@ -165,7 +165,7 @@ router.put('/location', [auth, [
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 }
 );
@@ -206,7 +206,7 @@ router.put('/haves', [auth, [
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 }
 );
@@ -228,7 +228,7 @@ router.delete('/haves/:id', auth, async (req,res) => {
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 });
 
@@ -267,7 +267,7 @@ router.put('/wants', [auth, [
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 }
 );
@@ -308,7 +308,7 @@ router.put('/follow', auth, async (req, res) => {
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 }
 );
@@ -327,7 +327,7 @@ router.get('/follows', auth, async (req,res) => {
         res.json(follows);
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 });
 
@@ -345,7 +345,7 @@ router.get('/followers', auth, async (req,res) => {
         res.json(followers);
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 });
 
@@ -366,7 +366,7 @@ router.delete('/following/:id', auth, async (req,res) => {
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 });
 
@@ -387,7 +387,7 @@ router.delete('/wants/:id', auth, async (req,res) => {
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).end('Server Error');
+        res.status(500).send('Server Error');
     }
 });
 
